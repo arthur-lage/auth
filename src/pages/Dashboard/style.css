@@ -1,0 +1,42 @@
+.dashboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.dashboard h1 {
+    color: #fff;
+    font-size: 4rem;
+    margin-bottom: 5rem;
+}
+
+.dashboard p {
+    margin-bottom: 2rem;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: #fff;
+}
+
+.dashboard .info p {
+    margin-bottom: 1rem;
+    color: #fff;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+}
+
+.dashboard button {
+    border: 0;
+    border-radius: 4px;
+    width: 30vw;
+    padding: 1rem 0;
+    color: #fff;
+    background: rgb(201, 49, 49);
+    transition: .2s ease;
+
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.dashboard button:hover {
+    filter: brightness(1.2);
+}

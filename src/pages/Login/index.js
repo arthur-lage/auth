@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 
 import api from "../../services/api";
 
-import { UserContext } from '../../contexts/UserContext'
+import { UserContext } from "../../contexts/UserContext";
+
+import "./style.css";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setToken } = useContext(UserContext)
+  const { setToken } = useContext(UserContext);
 
   async function handleLogin() {
     const data = {
@@ -19,12 +21,13 @@ function Login() {
     };
 
     const res = await api.login(data);
-    
-    setToken(res.data)
+
+    setToken(res.data);
+    localStorage.setItem("token", JSON.stringify(res.data));
   }
 
   return (
-    <div>
+    <div className="login">
       <h1>Login</h1>
 
       <section className="input-wrapper">
@@ -44,13 +47,17 @@ function Login() {
             placeholder="Password"
           />
         </div>
+
+        <div className="link-wrapper">
+          <Link className="link" to="/register">
+            Go to register
+          </Link>
+        </div>
+
+        <button onClick={handleLogin} type="button">
+          Login
+        </button>
       </section>
-
-      <Link to="/register">Go to register</Link>
-
-      <button onClick={handleLogin} type="button">
-        Login
-      </button>
     </div>
   );
 }

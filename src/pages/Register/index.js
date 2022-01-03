@@ -4,14 +4,16 @@ import { Link } from "react-router-dom";
 
 import api from "../../services/api";
 
-import { UserContext } from '../../contexts/UserContext'
+import { UserContext } from "../../contexts/UserContext";
+
+import "./style.css";
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setToken } = useContext(UserContext)
+  const { setToken } = useContext(UserContext);
 
   async function handleRegister() {
     const data = {
@@ -20,12 +22,13 @@ function Register() {
       password,
     };
 
-    const res = await api.register(data)
-      setToken(res.data)
+    const res = await api.register(data);
+    setToken(res.data);
+    localStorage.setItem("token", JSON.stringify(res.data));
   }
 
   return (
-    <div>
+    <div className="register">
       <h1>Register</h1>
 
       <section className="input-wrapper">
@@ -53,13 +56,17 @@ function Register() {
             placeholder="Password"
           />
         </div>
+
+        <div className="link-wrapper">
+          <Link className="link" to="/">
+            Go to login
+          </Link>
+        </div>
+
+        <button onClick={handleRegister} type="button">
+          Register
+        </button>
       </section>
-
-      <Link to="/">Go to login</Link>
-
-      <button onClick={handleRegister} type="button">
-        Register
-      </button>
     </div>
   );
 }

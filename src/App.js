@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+
+import './global.css'
 
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -16,9 +18,10 @@ function App() {
           <Routes>
             <Route
               path="/register"
-              element={isAuth ? <Dashboard userInfo={userInfo} /> : <Register />}
+              element={isAuth ? <Navigate replace to="/" /> : <Register />}
             />
-            <Route path="/" element={isAuth ? <Dashboard userInfo={userInfo} /> : <Login />} />
+            <Route path="/login" element={isAuth ? <Navigate replace to="/" /> : <Login />} />
+            <Route path="/" element={isAuth ? <Dashboard userInfo={userInfo} /> : <Navigate replace to="/login" />} />
           </Routes>
         </BrowserRouter>
     </div>

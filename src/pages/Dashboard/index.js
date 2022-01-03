@@ -1,18 +1,26 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 
+import { useNavigate } from 'react-router-dom'
+
+import './style.css'
+
 import api from "../../services/api";
 
 function Dashboard({ userInfo }) {
-  const { token } = useContext(UserContext);
+  const { token, setToken, setIsAuth } = useContext(UserContext);
+  const navigate = useNavigate()
 
   async function handleLogout() {
-    const res = await api.logout(token);
-    console.log(res)
+    // const res = await api.logout(token);
+    localStorage.setItem("token", null)
+    setToken(null)
+    setIsAuth(false)
+    navigate('/login')
   }
 
   return (
-    <div>
+    <div className="dashboard">
       <h1>Dashboard</h1>
       <p>Your token information is:</p>
       <section className="info">
